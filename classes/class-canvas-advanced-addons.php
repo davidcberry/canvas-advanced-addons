@@ -611,6 +611,9 @@ class Canvas_Advanced_Addons {
 								"class" => 'hidden last',
 								"type" => "color");
 
+// Check To See If WooCommerce Is Activated Before Showing The Settings
+if ( is_woocommerce_activated() ) {				
+
 			// Canvas WooCommerce Options
 			$options[] = array( 'name' => __( 'WooCommerce Settings', 'canvas-advanced-addons' ),
 								'type' => 'subheading' );
@@ -621,6 +624,8 @@ class Canvas_Advanced_Addons {
 								'type' => 'select2',
 								'options' => array( 'main-nav' => __( 'Main Navigation', 'canvas-advanced-addons' ), 'top-nav' => __( 'Top Navigation', 'canvas-advanced-addons' ) ),
 								'std' => 'main-nav' );
+
+} // END is_woocommerce_activated()
 																									
 			return $options;
 		 
