@@ -31,3 +31,5 @@ v1.0.0 - Intial Version - 02/15/2013.
 
 License: GPLv2 or later
 License URI: (http://www.gnu.org/licenses/gpl-2.0.html)
+
+~Current Version:1.0.1~
