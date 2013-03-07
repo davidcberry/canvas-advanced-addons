@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) || class_exists( 'WPGitHubUpdater' ) || class_exists
 		'zip_url' => 'https://github.com/stuartduff/canvas-advanced-addons/zipball/master',
 		'sslverify' => true,
 		'requires' => '3.0',
-		'tested' => '3.3',
+		'tested' => '3.5',
 		'readme' => 'readme.txt',
 		'access_token' => '',
 		);
