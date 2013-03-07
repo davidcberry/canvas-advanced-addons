@@ -47,6 +47,8 @@ class Canvas_Advanced_Addons {
 
 		add_action( 'init', array( &$this, 'woo_canvas_options_add' ) );
 
+		add_action( 'init', array( &$this, 'github_plugin_updater' ) );
+
 		// Enable full width header
 		if ( isset( $woo_options['woo_head_full_width'] ) && ( 'true' == $woo_options['woo_head_full_width'] ) ) {
 		add_action( 'init', array( &$this, 'full_width_header_logic' ) );
@@ -493,6 +495,18 @@ class Canvas_Advanced_Addons {
 
 	} // End canvas_custom_styling()
 
+
+	/**
+	 * Gitub Plugin Updater
+	 * @access private
+	 * @since 1.0.1
+	 * @return void
+	 */	
+    public function github_plugin_updater() {
+
+
+
+    }
 
 	/**
 	 * Integrate Setting into WooFramework
