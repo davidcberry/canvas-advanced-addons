@@ -4,23 +4,6 @@
 if ( ! defined( 'ABSPATH' ) || class_exists( 'WPGitHubUpdater' ) || class_exists( 'WP_GitHub_Updater' ) )
 	return;
 
-		if (is_admin()) { // note the use of is_admin() to double check that this is happening in the admin
-		    $config = array(
-		        'slug' => plugin_basename(__FILE__), // this is the slug of your plugin
-		        'proper_folder_name' => 'plugin-name', // this is the name of the folder your plugin lives in
-		        'api_url' => 'https://api.github.com/repos/stuartduff/canvas-advanced-addons', // the github API url of your github repo
-		        'raw_url' => 'https://raw.github.com/stuartduff/canvas-advanced-addons/master', // the github raw url of your github repo
-		        'github_url' => 'https://github.com/stuartduff/canvas-advanced-addons', // the github url of your github repo
-		        'zip_url' => 'https://github.com/stuartduff/canvas-advanced-addons/zipball/master', // the zip url of the github repo
-		        'sslverify' => true, // wether WP should check the validity of the SSL cert when getting an update, see https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/2 and https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/4 for details
-		        'requires' => '3.5', // which version of WordPress does your plugin require?
-		        'tested' => '3.5', // which version of WordPress is your plugin tested up to?
-		        'readme' => 'README.md', // which file to use as the readme for the version number
-		        'access_token' => '', // Access private repositories by authorizing under Appearance > Github Updates when this example plugin is installed
-		    );
-		    new WPGitHubUpdater($config);
-		}
-
 /**
  *
  *
@@ -97,7 +80,7 @@ class WP_GitHub_Updater {
 		if ( ! $this->has_minimum_config() ) {
 			$message = 'The GitHub Updater was initialized without the minimum required configuration, please check the config in your plugin. The following params are missing: ';
 			$message .= implode( ',', $this->missing_config );
-			_doing_it_wrong( __CLASS__, $message , self::VERSION );
+			_doing_it_wrong( __CLASS__, '' , self::VERSION );
 			return;
 		}
 
@@ -131,7 +114,7 @@ class WP_GitHub_Updater {
 		);
 
 		foreach ( $required_config_params as $required_param ) {
-			if ( empty( $this->config[$required_param] ) )
+			if ( ! empty( $this->config[$required_param] ) )
 				$this->missing_config[] = $required_param;
 		}
 
@@ -234,10 +217,7 @@ class WP_GitHub_Updater {
 
 		if ( $this->overrule_transients() || ( !isset( $version ) || !$version || '' == $version ) ) {
 
-			$query = trailingslashit( $this->config['raw_url'] ) . basename( $this->config['slug'] );
-			$query = add_query_arg( array( 'access_token' => $this->config['access_token'] ), $query );
-
-			$raw_response = wp_remote_get( $query, array( 'sslverify' => $this->config['sslverify'] ) );
+			$raw_response = $this->remote_get( trailingslashit( $this->config['raw_url'] ) . basename( $this->config['slug'] ) );
 
 			if ( is_wp_error( $raw_response ) )
 				$version = false;
@@ -250,10 +230,7 @@ class WP_GitHub_Updater {
 				$version = $matches[1];
 
 			// back compat for older readme version handling
-			$query = trailingslashit( $this->config['raw_url'] ) . $this->config['readme'];
-			$query = add_query_arg( array( 'access_token' => $this->config['access_token'] ), $query );
-
-			$raw_response = wp_remote_get( $query, array( 'sslverify' => $this->config['sslverify'] ) );
+			$raw_response = $this->remote_get( trailingslashit( $this->config['raw_url'] ) . $this->config['readme'] );
 
 			if ( is_wp_error( $raw_response ) )
 				return $version;
@@ -276,6 +253,26 @@ class WP_GitHub_Updater {
 
 
 	/**
+	 * Interact with GitHub
+	 *
+	 * @param string $query
+	 *
+	 * @since 1.6
+	 * @return mixed
+	 */
+	public function remote_get( $query ) {
+		if ( ! empty( $this->config['access_token'] ) )
+			$query = add_query_arg( array( 'access_token' => $this->config['access_token'] ), $query );
+
+		$raw_response = wp_remote_get( $query, array(
+			'sslverify' => $this->config['sslverify']
+		) );
+
+		return $raw_response;
+	}
+
+
+	/**
 	 * Get GitHub Data from the specified repository
 	 *
 	 * @since 1.0
@@ -288,10 +285,7 @@ class WP_GitHub_Updater {
 			$github_data = get_site_transient( $this->config['slug'].'_github_data' );
 
 			if ( $this->overrule_transients() || ( ! isset( $github_data ) || ! $github_data || '' == $github_data ) ) {
-				$query = $this->config['api_url'];
-				$query = add_query_arg( array( 'access_token' => $this->config['access_token'] ), $query );
-
-				$github_data = wp_remote_get( $query, array( 'sslverify' => $this->config['sslverify'] ) );
+				$github_data = $this->remote_get( $this->config['api_url'] );
 
 				if ( is_wp_error( $github_data ) )
 					return false;
