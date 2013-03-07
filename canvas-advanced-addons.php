@@ -4,7 +4,7 @@
  * Plugin URI: http://stuartduff.com/
  * Description: Adds some advanced styling features to WooThemes Canvas theme.
  * Author: Stuart Duff
- * Version: 1.1
+ * Version: 1.0
  * Author URI: http://stuartduff.com/
  *
  * @package WordPress
@@ -14,5 +14,8 @@
  */
 
 require_once( 'classes/class-canvas-advanced-addons.php' );
+
 global $canvas_advanced_addons;
+$canvas_advanced_addons = new Canvas_Advanced_Addons( __FILE__ );
+
 ?>

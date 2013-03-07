@@ -4,35 +4,6 @@
 if ( ! defined( 'ABSPATH' ) || class_exists( 'WPGitHubUpdater' ) || class_exists( 'WP_GitHub_Updater' ) )
 	return;
 
-	add_action( 'init', 'github_plugin_updater' );
-	 function github_plugin_updater() {
-
-	 	require_once( plugin_dir_path( __FILE__ ) . '/class-updater.php' );
-
-		define( 'WP_GITHUB_FORCE_UPDATE', true );
-
-		if ( is_admin() ) { // note the use of is_admin() to double check that this is happening in the admin
-
-		$config = array(
-		'slug' => plugin_basename( __FILE__ ),
-		'proper_folder_name' => 'canvas-advanced-addons',
-		'api_url' => 'https://api.github.com/repos/stuartduff/canvas-advanced-addons',
-		'raw_url' => 'https://raw.github.com/stuartduff/canvas-advanced-addons/master',
-		'github_url' => 'https://github.com/stuartduff/canvas-advanced-addons',
-		'zip_url' => 'https://github.com/stuartduff/canvas-advanced-addons/zipball/master',
-		'sslverify' => true,
-		'requires' => '3.0',
-		'tested' => '3.5',
-		'readme' => 'readme.txt',
-		'access_token' => '',
-		);
-
-		new WP_GitHub_Updater( $config );
-
-		}
-
-	}
-
 /**
  *
  *
@@ -204,7 +175,7 @@ class WP_GitHub_Updater {
 			$this->config['homepage'] = $plugin_data['PluginURI'];
 
 		if ( ! isset( $this->config['readme'] ) )
-			$this->config['readme'] = 'README.md';
+			$this->config['readme'] = 'readme.txt';
 
 	}
 
@@ -246,7 +217,10 @@ class WP_GitHub_Updater {
 
 		if ( $this->overrule_transients() || ( !isset( $version ) || !$version || '' == $version ) ) {
 
-			$raw_response = $this->remote_get( trailingslashit( $this->config['raw_url'] ) . basename( $this->config['slug'] ) );
+			$query = trailingslashit( $this->config['raw_url'] ) . basename( $this->config['slug'] );
+			$query = add_query_arg( array( 'access_token' => $this->config['access_token'] ), $query );
+
+			$raw_response = wp_remote_get( $query, array( 'sslverify' => $this->config['sslverify'] ) );
 
 			if ( is_wp_error( $raw_response ) )
 				$version = false;
@@ -259,7 +233,10 @@ class WP_GitHub_Updater {
 				$version = $matches[1];
 
 			// back compat for older readme version handling
-			$raw_response = $this->remote_get( trailingslashit( $this->config['raw_url'] ) . $this->config['readme'] );
+			$query = trailingslashit( $this->config['raw_url'] ) . $this->config['readme'];
+			$query = add_query_arg( array( 'access_token' => $this->config['access_token'] ), $query );
+
+			$raw_response = wp_remote_get( $query, array( 'sslverify' => $this->config['sslverify'] ) );
 
 			if ( is_wp_error( $raw_response ) )
 				return $version;
@@ -282,26 +259,6 @@ class WP_GitHub_Updater {
 
 
 	/**
-	 * Interact with GitHub
-	 *
-	 * @param string $query
-	 *
-	 * @since 1.6
-	 * @return mixed
-	 */
-	public function remote_get( $query ) {
-		if ( ! empty( $this->config['access_token'] ) )
-			$query = add_query_arg( array( 'access_token' => $this->config['access_token'] ), $query );
-
-		$raw_response = wp_remote_get( $query, array(
-			'sslverify' => $this->config['sslverify']
-		) );
-
-		return $raw_response;
-	}
-
-
-	/**
 	 * Get GitHub Data from the specified repository
 	 *
 	 * @since 1.0
@@ -314,7 +271,10 @@ class WP_GitHub_Updater {
 			$github_data = get_site_transient( $this->config['slug'].'_github_data' );
 
 			if ( $this->overrule_transients() || ( ! isset( $github_data ) || ! $github_data || '' == $github_data ) ) {
-				$github_data = $this->remote_get( $this->config['api_url'] );
+				$query = $this->config['api_url'];
+				$query = add_query_arg( array( 'access_token' => $this->config['access_token'] ), $query );
+
+				$github_data = wp_remote_get( $query, array( 'sslverify' => $this->config['sslverify'] ) );
 
 				if ( is_wp_error( $github_data ) )
 					return false;
@@ -364,7 +324,7 @@ class WP_GitHub_Updater {
 	 * @return object $data the data
 	 */
 	public function get_plugin_data() {
-		include_once ABSPATH.'/wp-admin/includes/plugin.php';
+		include_once ABSPATH.'/canvas-advanced-addons.php';
 		$data = get_plugin_data( WP_PLUGIN_DIR.'/'.$this->config['slug'] );
 		return $data;
 	}
