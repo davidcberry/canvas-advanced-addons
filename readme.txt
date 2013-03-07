@@ -39,6 +39,8 @@ Some of the features the plugin adds to your Canvas theme are listed below.
 
 == Upgrade Notice ==
 
+~Current Version:1.0~
+
 = 1.0.0 =
 * Initial release.
 
