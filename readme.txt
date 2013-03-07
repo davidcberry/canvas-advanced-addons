@@ -8,8 +8,6 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-~Current Version:1.0~
-
 == Description ==
 
 The Canvas Advanced Addons plugin will add additonal styling and customizations options to the WooThemes Framework / Theme Options Panel of you Canvas v5 theme.

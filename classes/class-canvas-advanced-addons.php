@@ -86,39 +86,7 @@ class Canvas_Advanced_Addons {
 		// Loads Custom Styling
 		add_action( 'woo_head', array( &$this, 'canvas_custom_styling' ) );
 
-		add_action( 'init', array( &$this, 'github_plugin_updater_test_init' ) );
-
 	} // End __construct()
-
-
-	public function github_plugin_updater_test_init() {
-
-		include_once( $this->dir . '/classes/class-updater.php' );
-
-		define( 'WP_GITHUB_FORCE_UPDATE', true );
-
-		if ( is_admin() ) { // note the use of is_admin() to double check that this is happening in the admin
-
-			$config = array(
-				'slug' => plugin_basename( __FILE__ ),
-				'proper_folder_name' => 'canvas-advanced-addons',
-				'api_url' => 'https://api.github.com/repos/stuartduff/canvas-advanced-addons',
-				'raw_url' => 'https://raw.github.com/stuartduff/canvas-advanced-addons/master',
-				'github_url' => 'https://github.com/stuartduff/canvas-advanced-addons',
-				'zip_url' => 'https://github.com/stuartduff/canvas-advanced-addons/zipball/master',
-				'sslverify' => true,
-				'requires' => '3.5',
-				'tested' => '3.5',
-				'readme' => 'readme.txt',
-				'access_token' => '',
-			);
-
-			new WP_GitHub_Updater( $config );
-
-		}
-
-	}
-
 
 	/**
 	 * Load the plugin's localisation file.
