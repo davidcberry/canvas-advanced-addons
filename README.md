@@ -8,17 +8,17 @@ Some of the features the plugin adds to your Canvas theme are listed below.
 
 * Display full width header with colour controls.
 * Display full width footer with colour controls.
-* Adjust The Primary Navigation Menu Items Position.
-* Adjust The Top Navigation Menu Items Position.
-* Add theme connect & subscribe section social icons to the header area.
+* Adjust The Primary Navigation Menu Items Position Left, Right, Center.
+* Adjust The Top Navigation Menu Items Position Left, Right, Center.
+* Add theme connect & subscribe section social icons to the header area on the right.
 * Add business slider to homepage.
 * Add magazine slider to homepage.
 * Display page content below the magazine slider.
-
+* Move WooCommerce cart to top or primary menu thanks to [Gerhard Potgieter] (https://github.com/kloon).
 
 ## Installation Instructions ##
 
-1. Download the plugin via WordPress.org.
+1. Download the plugin from the master branch at GitHub
 2. Upload the ZIP file through the "Plugins > Add New > Upload" screen in your WordPress dashboard.
 3. Activate the plugin through the 'Plugins' menu in WordPress
 4. Access the features from the WooThemes Options Panel > Advanced Settings
