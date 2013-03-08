@@ -25,6 +25,8 @@ Some of the features the plugin adds to your Canvas theme are listed below.
 
 ## Changelog ##
 
+v1.0.1 - Under Development.
+
 v1.0.0 - Intial Version - 02/15/2013.
 
 ## License ##
