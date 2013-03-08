@@ -44,5 +44,8 @@ Some of the features the plugin adds to your Canvas theme are listed below.
 
 == Changelog ==
 
+= 1.0.1 =
+* Under Development
+
 = 1.0.0 =
 * Intial Version.
