@@ -17,4 +17,5 @@ require_once( 'classes/class-canvas-advanced-addons.php' );
 
 global $canvas_advanced_addons;
 $canvas_advanced_addons = new Canvas_Advanced_Addons( __FILE__ );
+
 ?>
