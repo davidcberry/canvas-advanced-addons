@@ -402,10 +402,22 @@ class Canvas_Advanced_Addons {
 			$output .= '#top {padding:0 23px 0 0;width: 100%;}' . "\n";
 	
 			$full_head_bg = $woo_options['woo_full_head_bg'];
+			$full_head_bg_image = $woo_options['woo_full_head_bg_image'];
+			$full_head_bg_image_repeat = $woo_options['woo_full_head_bg_image_repeat'];
 			$full_primary_menu_bg = $woo_options['woo_full_primary_menu_bg'];
 
+			$output .= '#header-container { '. "\n";
+			
 			if ( $full_head_bg )
-				$output .= '#header-container {padding:0;background-color:' . $full_head_bg . '}'. "\n";		
+				$output .= 'padding:0;background-color:' . $full_head_bg . ';'. "\n";
+			if ( $full_head_bg_image )
+				$output .= 'background-image: url(' . $full_head_bg_image . ');'. "\n";
+			if ( $full_head_bg_image_repeat )
+				$output .= 'background-repeat:' . $full_head_bg_image_repeat . ';'. "\n";
+
+			$output .= '}'. "\n";	
+
+
 			if ( $full_primary_menu_bg )
 				$output .= '#nav-container {padding:0;background-color:' . $full_primary_menu_bg . '}'. "\n";	
 
@@ -528,14 +540,29 @@ class Canvas_Advanced_Addons {
 								"id" => $shortname."_full_head_bg",
 								"std" => "#316594",
 								"class" => 'hidden',
-								"type" => "color");  
+								"type" => "color"); 
+
+			$options[] = array( "name" => __( 'Full Width Header Background Image', 'canvas-advanced-addons' ),
+								"desc" => __( 'Upload a background image, or specify the image address of your image (http://yoursite.com/image.png). <br/>Image should be same width as your site width.', 'canvas-advanced-addons' ),
+								"id" => $shortname."_full_head_bg_image",
+								"std" => "",
+								"class" => 'hidden',
+								"type" => "upload");  
+
+			$options[] = array( "name" => __( 'Full Width Header Background Image Repeat', 'canvas-advanced-addons' ),
+								"desc" => __( 'Select how you want your background image to display.', 'canvas-advanced-addons' ),
+								"id" => $shortname."_full_head_bg_image_repeat",
+								"class" => 'hidden',
+								"type" => "select",
+								"options" => array("No Repeat" => "no-repeat", "Repeat" => "repeat","Repeat Horizontally" => "repeat-x", "Repeat Vertically" => "repeat-y",) );   			
 
 			$options[] = array( "name" => __( 'Full Width Primary Menu Background Color', 'canvas-advanced-addons' ),
 								"desc" => __( 'Select the background color you want for your full width header primary menu area.', 'canvas-advanced-addons' ),
 								"id" => $shortname."_full_primary_menu_bg",
 								"std" => "#CDDAE3",
 								"class" => 'hidden last',
-								"type" => "color"); 			
+								"type" => "color"); 
+
 
 			$options[] = array( "name" => __( 'Add Social Icons To Header', 'canvas-advanced-addons' ),
 								"desc" => __( 'Enabling this setting will add the subscribe and connect social icons to your header.', 'canvas-advanced-addons' ),
