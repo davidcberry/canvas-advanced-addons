@@ -473,13 +473,24 @@ class Canvas_Advanced_Addons {
 		if ( isset( $woo_options['woo_foot_full_width'] ) && ( 'true' == $woo_options['woo_foot_full_width'] ) ) {
 
 			$full_foot_widget_bg = $woo_options['woo_full_foot_widget_bg'];
+			$full_foot_widget_bg_image = $woo_options['woo_full_foot_widget_bg_image'];
+			$full_foot_widget_bg_image_repeat = $woo_options['woo_full_foot_widget_bg_image_repeat'];
 			$full_foot_bg = $woo_options['woo_full_foot_bg'];
 			$footer_bg = $woo_options['woo_footer_bg'];	
 
 			$output .= '#footer {height:auto;}'. "\n";
 
+			$output .= '#footer-widgets-container { '. "\n";
+			
 			if ( $full_foot_widget_bg )
-				$output .= '#footer-widgets-container {padding:0;background-color:' . $full_foot_widget_bg . '}'. "\n";		
+				$output .= 'padding:0;background-color:' . $full_foot_widget_bg . ';'. "\n";	
+			if ( $full_foot_widget_bg_image )
+				$output .= 'background-image: url(' . $full_foot_widget_bg_image . ');'. "\n";
+			if ( $full_foot_widget_bg_image_repeat )
+				$output .= 'background-repeat:' . $full_foot_widget_bg_image_repeat . ';'. "\n";
+
+			$output .= '}'. "\n";	
+
 			if ( $full_foot_bg )
 				$output .= '#footer-container {padding:0;background-color:' . $full_foot_bg . '}'. "\n";
 			if ( $footer_bg ) :
@@ -629,7 +640,21 @@ class Canvas_Advanced_Addons {
 								"id" => $shortname."_full_foot_widget_bg",
 								"std" => "#CDDAE3",
 								"class" => 'hidden',
-								"type" => "color"); 		
+								"type" => "color"); 
+
+			$options[] = array( "name" => __( 'Full Width Footer Background Image', 'canvas-advanced-addons' ),
+								"desc" => __( 'Upload a background image, or specify the image address of your image (http://yoursite.com/image.png). <br/>Image should be same width as your site width.', 'canvas-advanced-addons' ),
+								"id" => $shortname."_full_foot_widget_bg_image",
+								"std" => "",
+								"class" => 'hidden',
+								"type" => "upload");  
+
+			$options[] = array( "name" => __( 'Full Width footer Background Image Repeat', 'canvas-advanced-addons' ),
+								"desc" => __( 'Select how you want your background image to display.', 'canvas-advanced-addons' ),
+								"id" => $shortname."_full_foot_widget_bg_image_repeat",
+								"class" => 'hidden',
+								"type" => "select",
+								"options" => array("No Repeat" => "no-repeat", "Repeat" => "repeat","Repeat Horizontally" => "repeat-x", "Repeat Vertically" => "repeat-y",) );  										
 
 			$options[] = array( "name" => __( 'Full Width Footer Background Color', 'canvas-advanced-addons' ),
 								"desc" => __( 'Select the background color you want for your full width footer.', 'canvas-advanced-addons' ),
