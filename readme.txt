@@ -16,8 +16,8 @@ NOTE: This plugin is not supported by WooThemes and if you require support for t
 
 Some of the features the plugin adds to your Canvas theme are listed below.
 
-1. Display full width header with colour controls.
-2. Display full width footer with colour controls.
+1. Display full width header with colour controls and background image settings.
+2. Display full width footer with colour controls and background image settings.
 3. Adjust The Primary Navigation Menu Items Position Left, Right, Center.
 4. Adjust The Top Navigation Menu Items Position Left, Right, Center.
 5. Add theme connect & subscribe section social icons to the header area.
