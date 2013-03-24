@@ -25,9 +25,13 @@ Some of the features the plugin adds to your Canvas theme are listed below.
 
 ## Changelog ##
 
-v1.0.1 - Under Development.
+03/24/2013 - version 1.0.1
 
-v1.0.0 - Intial Version - 02/15/2013.
+* Added the ability to include images backgrounds within full width header and footers
+
+02/15/2013 - version 1.0.0
+
+* Intial Version
 
 ## License ##
 
