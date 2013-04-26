@@ -1,4 +1,4 @@
-# Canvas Advanced Addons Plugin v1.0.1 #
+# Canvas Advanced Addons Plugin v1.0.2 #
 
 The Canvas Advanced Addons plugin will add additonal styling and customizations options to the WooThemes Framework / Theme Options Panel of you Canvas v5 theme. You will need a copy of the [WooThemes Canvas WordPress Theme] (http://www.woothemes.com/products/canvas/) to use this plugin.
 
@@ -6,8 +6,6 @@ NOTE: This plugin is not supported by WooThemes and if you require support for t
 
 Some of the features the plugin adds to your Canvas theme are listed below.
 
-* Display full width header with colour controls and background image settings.
-* Display full width footer with colour controls and background image settings.
 * Adjust The Primary Navigation Menu Items Position Left, Right, Center.
 * Adjust The Top Navigation Menu Items Position Left, Right, Center.
 * Add theme connect & subscribe section social icons to the header area on the right.
@@ -24,6 +22,10 @@ Some of the features the plugin adds to your Canvas theme are listed below.
 4. Access the features from the WooThemes Options Panel > Advanced Settings
 
 ## Changelog ##
+
+04/26/2013 - version 1.0.2
+
+* Removed full width header and footers.
 
 03/24/2013 - version 1.0.1
 

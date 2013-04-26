@@ -4,7 +4,7 @@ Donate link: http://stuartduff.com/
 Tags: themes, addon, styling, woothemes
 Requires at least: 3.5
 Tested up to: 3.5.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,10 +40,13 @@ Some of the features the plugin adds to your Canvas theme are listed below.
 
 == Upgrade Notice ==
 
-= 1.0.1 =
-* Added ability to include images backgrounds within full width header and footers.
+= 1.0.2 =
+* Removed full width header and footers.
 
 == Changelog ==
+
+= 1.0.2 =
+* Removed full width header and footers.
 
 = 1.0.1 =
 * Added ability to include images backgrounds within full width header and footers.

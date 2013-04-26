@@ -47,19 +47,9 @@ class Canvas_Advanced_Addons {
 
 		add_action( 'init', array( &$this, 'woo_canvas_options_add' ) );
 
-		// Enable full width header
-		if ( isset( $woo_options['woo_head_full_width'] ) && ( 'true' == $woo_options['woo_head_full_width'] ) ) {
-		add_action( 'init', array( &$this, 'full_width_header_logic' ) );
-		}
-
 		// Add Social Icons To Header
 		if ( isset( $woo_options['woo_head_social_icons'] ) && ( 'true' == $woo_options['woo_head_social_icons'] ) ) {
 		add_action( 'woo_header_inside', array( &$this, 'header_social_icons_logic' ) );
-		}
-
-		// Enable full width footer
-		if ( isset( $woo_options['woo_foot_full_width'] ) && ( 'true' == $woo_options['woo_foot_full_width'] ) ) {
-		add_action( 'init', array( &$this, 'full_width_footer_logic' ) );
 		}
 
 		// Enable Business Slider On Homepage
@@ -146,43 +136,6 @@ class Canvas_Advanced_Addons {
 			update_option( 'canvas-advanced-addons' . '-version', $this->version );
 		}
 	} // End register_plugin_version()	
-
-	/**
-	 * Full WIdth Header Logic.
-	 * @access public
-	 * @since 1.0.0
-	 * @return void
-	 */	
-
-	public function full_width_header_logic() {
-
-		// Add header container
-		add_action( 'woo_header_before', 'header_container_start' );
-		function header_container_start() { ?>
-		    <!--#header-container-->
-		    <div id="header-container">
-		<?php
-		}
-		add_action( 'woo_header_after', 'header_container_end', 8 );
-		function header_container_end() { ?>
-		    </div><!--/#header-container-->
-		<?php
-		}
-		 
-		// Add navigation container
-		add_action( 'woo_nav_before', 'nav_container_start' );
-		function nav_container_start() { ?>
-		    <!--#nav-container-->
-		    <div id="nav-container">
-		<?php
-		}
-		add_action( 'woo_nav_after', 'nav_container_end' );
-		function nav_container_end() { ?>
-		    </div><!--/#nav-container-->
-		<?php
-		}
-
-	} // End full_width_header_logic()
 
 	/**
 	 * Display Social Icons In The Header.
@@ -313,43 +266,6 @@ class Canvas_Advanced_Addons {
 	} // End magazine_page_content_logic()
 
 	/**
-	 * Full Width footer Logic.
-	 * @access public
-	 * @since 1.0.0
-	 * @return void
-	 */	
-
-	public function full_width_footer_logic() {
-
-		// Add footer widget container
-		add_action( 'woo_footer_top', 'footer_widgets_container_start', 8 );
-		function footer_widgets_container_start() { ?>
-		    <!--#footer-widgets-container-->
-		    <div id="footer-widgets-container">
-		<?php
-		}
-		add_action( 'woo_footer_before', 'footer_widgets_container_end' );
-		function footer_widgets_container_end() { ?>
-		    </div><!--/#footer_widgets_container_end-->
-		<?php
-		}
-		 
-		// Add footer container
-		add_action( 'woo_footer_before', 'footer_container_start' );
-		function footer_container_start() { ?>
-		    <!--#footer_container_start-->
-		    <div id="footer-container">
-		<?php
-		}
-		add_action( 'woo_footer_after', 'footer_container_end' );
-		function footer_container_end() { ?>
-		    </div><!--/#footer_container_end-->
-		<?php
-		}	
-
-	} // End full_width_footer_logic()
-
-	/**
 	 * Remove the mini cart from the main navigation
 	 * @access public
 	 * @since 1.0.1
@@ -386,42 +302,6 @@ class Canvas_Advanced_Addons {
 		global $woo_options;
 
 		$output = '';
-
-		// Add css if full width footer or header is activated
-		if ( isset( $woo_options['woo_head_full_width'] ) && ( 'true' == $woo_options['woo_head_full_width'] )  ||  isset( $woo_options['woo_foot_full_width'] ) && ( 'true' == $woo_options['woo_foot_full_width'] ) ) {
-
-			$output .= 'body {padding: 0;}'. "\n";
-			$output .= '#wrapper {padding:0;min-width: 100% !important;width:100%}' . "\n";
-			$output .= '#content {padding:0}' . "\n";
-
-		}	
-
-		// Add css for the full width header
-		if ( isset( $woo_options['woo_head_full_width'] ) && ( 'true' == $woo_options['woo_head_full_width'] ) ) {
-
-			$output .= '#top {padding:0 23px 0 0;width: 100%;}' . "\n";
-	
-			$full_head_bg = $woo_options['woo_full_head_bg'];
-			$full_head_bg_image = $woo_options['woo_full_head_bg_image'];
-			$full_head_bg_image_repeat = $woo_options['woo_full_head_bg_image_repeat'];
-			$full_primary_menu_bg = $woo_options['woo_full_primary_menu_bg'];
-
-			$output .= '#header-container { '. "\n";
-			
-			if ( $full_head_bg )
-				$output .= 'padding:0;background-color:' . $full_head_bg . ';'. "\n";
-			if ( $full_head_bg_image )
-				$output .= 'background-image: url(' . $full_head_bg_image . ');'. "\n";
-			if ( $full_head_bg_image_repeat )
-				$output .= 'background-repeat:' . $full_head_bg_image_repeat . ';'. "\n";
-
-			$output .= '}'. "\n";	
-
-
-			if ( $full_primary_menu_bg )
-				$output .= '#nav-container {padding:0;background-color:' . $full_primary_menu_bg . '}'. "\n";	
-
-		}
 
 		// Add css for the header social icons
 		if ( isset( $woo_options['woo_head_social_icons'] ) && ( 'true' == $woo_options['woo_head_social_icons'] ) ) {
@@ -469,37 +349,6 @@ class Canvas_Advanced_Addons {
 
 		}		
 
-		// Add css for the full width footer
-		if ( isset( $woo_options['woo_foot_full_width'] ) && ( 'true' == $woo_options['woo_foot_full_width'] ) ) {
-
-			$full_foot_widget_bg = $woo_options['woo_full_foot_widget_bg'];
-			$full_foot_widget_bg_image = $woo_options['woo_full_foot_widget_bg_image'];
-			$full_foot_widget_bg_image_repeat = $woo_options['woo_full_foot_widget_bg_image_repeat'];
-			$full_foot_bg = $woo_options['woo_full_foot_bg'];
-			$footer_bg = $woo_options['woo_footer_bg'];	
-
-			$output .= '#footer {height:auto;}'. "\n";
-
-			$output .= '#footer-widgets-container { '. "\n";
-			
-			if ( $full_foot_widget_bg )
-				$output .= 'padding:0;background-color:' . $full_foot_widget_bg . ';'. "\n";	
-			if ( $full_foot_widget_bg_image )
-				$output .= 'background-image: url(' . $full_foot_widget_bg_image . ');'. "\n";
-			if ( $full_foot_widget_bg_image_repeat )
-				$output .= 'background-repeat:' . $full_foot_widget_bg_image_repeat . ';'. "\n";
-
-			$output .= '}'. "\n";	
-
-			if ( $full_foot_bg )
-				$output .= '#footer-container {padding:0;background-color:' . $full_foot_bg . '}'. "\n";
-			if ( $footer_bg ) :
-				$output .= '#footer {border-top: 1px solid ' .$footer_bg . '}'. "\n";
-			else :
-				$output .= '#footer {border-top: 1px solid ' . $full_foot_bg . '}'. "\n";
-			endif;
-		}
-		
 		// Add css for top nav WooCommerce mini cart
 		if ( isset( $woo_options['woo_mini_cart_location'] ) && ( 'top-nav' == $woo_options['woo_mini_cart_location'] ) ) {
 			$output .= '#top .cart-contents::before {font-family: \'FontAwesome\';display: inline-block;font-size: 100%;margin-right: .618em;font-weight: normal;line-height: 1em;width: 1em;content: "\f07a";}' ."\n";
@@ -538,42 +387,6 @@ class Canvas_Advanced_Addons {
 			// Canvas Header Options
 			$options[] = array( 'name' => __( 'Header Settings', 'canvas-advanced-addons' ),
 								'type' => 'subheading');
-
-			$options[] = array( "name" => __( 'Enable Full Width Header', 'canvas-advanced-addons' ),
-								"desc" => __( 'Enabling this selection will set your site to display its header at full width, Dont enable this setting with the themes Boxed Layout', 'canvas-advanced-addons' ),
-								"id" => $shortname."_head_full_width",
-								"std" => "false",
-								"class" => 'collapsed',
-								"type" => "checkbox" );
-
-			$options[] = array( "name" => __( 'Full Width Header Background Color', 'canvas-advanced-addons' ),
-								"desc" => __( 'Select the background color you want for your full width header.', 'canvas-advanced-addons' ),
-								"id" => $shortname."_full_head_bg",
-								"std" => "#316594",
-								"class" => 'hidden',
-								"type" => "color"); 
-
-			$options[] = array( "name" => __( 'Full Width Header Background Image', 'canvas-advanced-addons' ),
-								"desc" => __( 'Upload a background image, or specify the image address of your image (http://yoursite.com/image.png). <br/>Image should be same width as your site width.', 'canvas-advanced-addons' ),
-								"id" => $shortname."_full_head_bg_image",
-								"std" => "",
-								"class" => 'hidden',
-								"type" => "upload");  
-
-			$options[] = array( "name" => __( 'Full Width Header Background Image Repeat', 'canvas-advanced-addons' ),
-								"desc" => __( 'Select how you want your background image to display.', 'canvas-advanced-addons' ),
-								"id" => $shortname."_full_head_bg_image_repeat",
-								"class" => 'hidden',
-								"type" => "select",
-								"options" => array("No Repeat" => "no-repeat", "Repeat" => "repeat","Repeat Horizontally" => "repeat-x", "Repeat Vertically" => "repeat-y",) );   			
-
-			$options[] = array( "name" => __( 'Full Width Primary Menu Background Color', 'canvas-advanced-addons' ),
-								"desc" => __( 'Select the background color you want for your full width header primary menu area.', 'canvas-advanced-addons' ),
-								"id" => $shortname."_full_primary_menu_bg",
-								"std" => "#CDDAE3",
-								"class" => 'hidden last',
-								"type" => "color"); 
-
 
 			$options[] = array( "name" => __( 'Add Social Icons To Header', 'canvas-advanced-addons' ),
 								"desc" => __( 'Enabling this setting will add the subscribe and connect social icons to your header.', 'canvas-advanced-addons' ),
@@ -621,47 +434,6 @@ class Canvas_Advanced_Addons {
 								"id" => $shortname."_magazine_page_content",
 								"std" => "false",
 								"type" => "checkbox" );		
-
-
-			// Canvas Footer Options
-			$options[] = array( 'name' => __( 'Footer Settings', 'canvas-advanced-addons' ),
-								'type' => 'subheading');
-
-			// Full Width Footer Options
-			$options[] = array( "name" => __( 'Enable Full Width Footer', 'canvas-advanced-addons' ),
-								"desc" => __( 'Enabling this selection will set your site to display its footer at full width, Dont enable this setting with the themes Boxed Layout', 'canvas-advanced-addons' ),
-								"id" => $shortname."_foot_full_width",
-								"std" => "false",
-								"class" => 'collapsed',
-								"type" => "checkbox" );
-
-			$options[] = array( "name" => __( 'Full Width Footer Widget Area Background Color', 'canvas-advanced-addons' ),
-								"desc" => __( 'Select the background color you want for your full width widget area.', 'canvas-advanced-addons' ),
-								"id" => $shortname."_full_foot_widget_bg",
-								"std" => "#CDDAE3",
-								"class" => 'hidden',
-								"type" => "color"); 
-
-			$options[] = array( "name" => __( 'Full Width Footer Background Image', 'canvas-advanced-addons' ),
-								"desc" => __( 'Upload a background image, or specify the image address of your image (http://yoursite.com/image.png). <br/>Image should be same width as your site width.', 'canvas-advanced-addons' ),
-								"id" => $shortname."_full_foot_widget_bg_image",
-								"std" => "",
-								"class" => 'hidden',
-								"type" => "upload");  
-
-			$options[] = array( "name" => __( 'Full Width footer Background Image Repeat', 'canvas-advanced-addons' ),
-								"desc" => __( 'Select how you want your background image to display.', 'canvas-advanced-addons' ),
-								"id" => $shortname."_full_foot_widget_bg_image_repeat",
-								"class" => 'hidden',
-								"type" => "select",
-								"options" => array("No Repeat" => "no-repeat", "Repeat" => "repeat","Repeat Horizontally" => "repeat-x", "Repeat Vertically" => "repeat-y",) );  										
-
-			$options[] = array( "name" => __( 'Full Width Footer Background Color', 'canvas-advanced-addons' ),
-								"desc" => __( 'Select the background color you want for your full width footer.', 'canvas-advanced-addons' ),
-								"id" => $shortname."_full_foot_bg",
-								"std" => "#316594",
-								"class" => 'hidden last',
-								"type" => "color");
 
 			// Check To See If WooCommerce Is Activated Before Showing The Settings
 			if ( is_woocommerce_activated() ) {				
