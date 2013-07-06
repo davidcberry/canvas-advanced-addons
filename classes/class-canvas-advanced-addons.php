@@ -49,7 +49,7 @@ class Canvas_Advanced_Addons {
 
 		// Add Social Icons To Header
 		if ( isset( $woo_options['woo_head_social_icons'] ) && ( 'true' == $woo_options['woo_head_social_icons'] ) ) {
-		add_action( 'woo_header_inside', array( &$this, 'header_social_icons_logic' ) );
+		add_action( 'woo_header_inside', array( &$this, 'header_social_icons_logic' ), 10 );
 		}
 
 		// Enable Business Slider On Homepage
@@ -145,43 +145,70 @@ class Canvas_Advanced_Addons {
 	 */	
 	public function header_social_icons_logic() {
 
-		 global $woo_options;
-		 
-		 $html = '';
-		 
-		 // Open DIV tag.
-		 $html .= '<div id="social-links" class="social-links fr">' . "\n";
-		 
-		 $template_directory = get_template_directory_uri();
-		 
-		 $profiles = array(
-		 'twitter' => __( 'Follow us on Twitter' , 'canvas-advanced-addons' ),
-		 'facebook' => __( 'Connect on Facebook' , 'canvas-advanced-addons' ),
-		 'youtube' => __( 'Watch on YouTube' , 'canvas-advanced-addons' ),
-		 'flickr' => __( 'See photos on Flickr' , 'canvas-advanced-addons' ),
-		 'linkedin' => __( 'Connect on LinkedIn' , 'canvas-advanced-addons' ),
-		 'delicious' => __( 'Discover on Delicious' , 'canvas-advanced-addons' ),
-		 'googleplus' => __( 'View Google+ profile' , 'canvas-advanced-addons' )
-		 );
-		 
-		 foreach ( $profiles as $key => $text ) {
-		 	if ( isset( $woo_options['woo_connect_' . $key] ) && $woo_options['woo_connect_' . $key] != '' ) {
-		 		$html .= '<a class="social-icon-' . $key . '" href="' . $woo_options['woo_connect_' . $key] . '" title="' . esc_attr( $text ) . '"></a>' . "\n";
-		 	}
-		 }
-		 
-		 // Add a custom RSS icon, linking to Feedburner or default RSS feed.
-		 $rss_url = get_bloginfo_rss( 'rss2_url' );
-		 $text = __( 'Subscribe to our RSS feed', 'canvas-advanced-addons' );
-		 if ( isset( $woo_options['woo_feed_url'] ) && ( $woo_options['woo_feed_url'] != '' ) ) { $rss_url = $woo_options['woo_feed_url']; }
-		 
-		 $html .= '<a href="' . $rss_url . '" title="' . esc_attr( $text ) . '"></a>' . "\n";
-		 
-		 $html .= '</div><!--/#social-links .social-links fr-->' . "\n";
-		 
-		 echo $html;	
-
-	} // End header_social_icons_logic()	
+	 global $woo_options; 
+	 
+	  	$settings = array(
+							'feed_url' => '',
+							'connect_rss' => '',
+							'connect_twitter' => '',
+							'connect_facebook' => '',
+							'connect_youtube' => '',
+							'connect_flickr' => '',
+							'connect_linkedin' => '',
+							'connect_delicious' => '',
+							'connect_rss' => '',
+							'connect_googleplus' => '',
+							'connect_dribbble' => '',
+							'connect_instagram' => '',
+							'connect_vimeo' => '',
+							'connect_pinterest' => ''
+							);
+			$settings = woo_get_dynamic_values( $settings );
+	 
+	 ?>
+			
+				<div class="social">
+			   		<?php if ( $settings['connect_rss' ] == "true" ) { ?>
+			   		<a href="<?php if ( $settings['feed_url'] ) { echo esc_url( $settings['feed_url'] ); } else { echo get_bloginfo_rss('rss2_url'); } ?>" class="subscribe" title="RSS"></a>
+	 
+			   		<?php } if ( $settings['connect_twitter' ] != "" ) { ?>
+			   		<a target="_blank" href="<?php echo esc_url( $settings['connect_twitter'] ); ?>" class="twitter" title="Twitter"></a>
+	 
+			   		<?php } if ( $settings['connect_facebook' ] != "" ) { ?>
+			   		<a target="_blank" href="<?php echo esc_url( $settings['connect_facebook'] ); ?>" class="facebook" title="Facebook"></a>
+	 
+			   		<?php } if ( $settings['connect_youtube' ] != "" ) { ?>
+			   		<a target="_blank" href="<?php echo esc_url( $settings['connect_youtube'] ); ?>" class="youtube" title="YouTube"></a>
+	 
+			   		<?php } if ( $settings['connect_flickr' ] != "" ) { ?>
+			   		<a target="_blank" href="<?php echo esc_url( $settings['connect_flickr'] ); ?>" class="flickr" title="Flickr"></a>
+	 
+			   		<?php } if ( $settings['connect_linkedin' ] != "" ) { ?>
+			   		<a target="_blank" href="<?php echo esc_url( $settings['connect_linkedin'] ); ?>" class="linkedin" title="LinkedIn"></a>
+	 
+			   		<?php } if ( $settings['connect_delicious' ] != "" ) { ?>
+			   		<a target="_blank" href="<?php echo esc_url( $settings['connect_delicious'] ); ?>" class="delicious" title="Delicious"></a>
+	 
+			   		<?php } if ( $settings['connect_googleplus' ] != "" ) { ?>
+			   		<a target="_blank" href="<?php echo esc_url( $settings['connect_googleplus'] ); ?>" class="googleplus" title="Google+"></a>
+	 
+					<?php } if ( $settings['connect_dribbble' ] != "" ) { ?>
+			   		<a target="_blank" href="<?php echo esc_url( $settings['connect_dribbble'] ); ?>" class="dribbble" title="Dribbble"></a>
+	 
+					<?php } if ( $settings['connect_instagram' ] != "" ) { ?>
+			   		<a target="_blank" href="<?php echo esc_url( $settings['connect_instagram'] ); ?>" class="instagram" title="Instagram"></a>
+	 
+					<?php } if ( $settings['connect_vimeo' ] != "" ) { ?>
+			   		<a target="_blank" href="<?php echo esc_url( $settings['connect_vimeo'] ); ?>" class="vimeo" title="Vimeo"></a>
+	 
+					<?php } if ( $settings['connect_pinterest' ] != "" ) { ?>
+			   		<a target="_blank" href="<?php echo esc_url( $settings['connect_pinterest'] ); ?>" class="pinterest" title="Pinterest"></a>
+	 
+					<?php } ?>
+				</div>
+	 
+	<?php } // END header_social_icons_logic ()
+	
 
 
 	/**
@@ -306,16 +333,22 @@ class Canvas_Advanced_Addons {
 		// Add css for the header social icons
 		if ( isset( $woo_options['woo_head_social_icons'] ) && ( 'true' == $woo_options['woo_head_social_icons'] ) ) {
 
-			$output .= '#header #social-links a { display: inline-block; height: 28px; width: 30px; background-image: url('.$this->assets_url.'/images/ico-subscribe-social.png); background-repeat: no-repeat; }' . "\n";
-			$output .= '#header #social-links a.subscribe { background-position: 0px 0; }' . "\n";
-			$output .= '#header #social-links a.social-icon-twitter { background-position: -30px 0; }' . "\n";
-			$output .= '#header #social-links a.social-icon-facebook { background-position: -60px 0; }' . "\n";
-			$output .= '#header #social-links a.social-icon-youtube { background-position: -90px 0; }' . "\n";
-			$output .= '#header #social-links a.social-icon-flickr { background-position: -120px 0; }' . "\n";
-			$output .= '#header #social-links a.social-icon-linkedin { background-position: -150px 0; }' . "\n";
-			$output .= '#header #social-links a.social-icon-delicious { background-position: -180px 0; }' . "\n";
-			$output .= '#header #social-links a.social-icon-googleplus { background-position: -210px 0; }' . "\n";
-			$output .= '#header #social-links .heading-text { vertical-align: top; }' . "\n";	
+			$output .= '#header .social { float:right; }' . "\n";
+			$output .= '#header .social a { filter: alpha(opacity=@opacity * 100); -moz-opacity: 0.8; -khtml-opacity: 0.8; opacity: 0.8; -webkit-transition: all ease-in-out 0.2s; -moz-transition: all ease-in-out 0.2s; -o-transition: all ease-in-out 0.2s; transition: all ease-in-out 0.2s; }' . "\n";
+			$output .= '#header .social a:hover { filter: alpha(opacity=@opacity * 100); -moz-opacity: 1; -khtml-opacity: 1; opacity: 1; text-decoration: none; }' . "\n";
+			$output .= '#header .social a:before { font-family: Social; font-size: 1.1em; line-height: 1; margin: 0 0.2em 0.6em 0; padding: .53em; display: inline-block; -webkit-border-radius: 300px; -moz-border-radius: 300px; border-radius: 300px; color: #fff; text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1); }' . "\n";
+			$output .= '#header .social a.subscribe:before { content: "\e001"; background-color: #FF6600; }' . "\n";
+			$output .= '#header .social a.twitter:before { content: "\e002"; background-color: #00aced; }' . "\n";
+			$output .= '#header .social a.facebook:before { content: "\e003"; background-color: #3b5998; }' . "\n";
+			$output .= '#header .social a.youtube:before { content: "\e004"; background-color: #af2b26; }' . "\n";
+			$output .= '#header .social a.flickr:before { content: "\e005"; background-color: #ff0084; }' . "\n";	
+			$output .= '#header .social a.linkedin:before { content: "\e006"; background-color: #71c5ef; }' . "\n";
+			$output .= '#header .social a.delicious:before { content: "\e007"; background-color: #285da7; }' . "\n";
+			$output .= '#header .social a.googleplus:before { content: "\e008"; background-color: #2d2d2d; font-weight: bold; }' . "\n";
+			$output .= '#header .social a.dribbble:before { content: "\e009"; background-color: #ea4c89; }' . "\n";
+			$output .= '#header .social a.instagram:before { content: "\e010"; background-color: #517fa4; }' . "\n";
+			$output .= '#header .social a.vimeo:before { content: "\e011"; background-color: #33454E; }' . "\n";
+			$output .= '#header .social a.pinterest:before { content: "\e012"; background-color: #cb2027; }' . "\n";
 
 		}	
 
