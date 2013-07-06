@@ -52,6 +52,11 @@ class Canvas_Advanced_Addons {
 		add_action( 'woo_header_inside', array( &$this, 'header_social_icons_logic' ), 10 );
 		}
 
+		// Add Search Box To Header
+		if ( isset( $woo_options['woo_head_searchbox'] ) && ( 'true' == $woo_options['woo_head_searchbox'] ) ) {
+		add_action( 'woo_header_inside', array( &$this, 'woo_custom_add_searchform' ), 20 );
+		}		
+
 		// Enable Business Slider On Homepage
 		if ( isset( $woo_options['woo_biz_slider_homepage'] ) && ( 'true' == $woo_options['woo_biz_slider_homepage'] ) ) {
 		add_action( 'get_header', array( &$this, 'business_slider_logic' ) );
@@ -209,6 +214,18 @@ class Canvas_Advanced_Addons {
 	 
 	<?php } // END header_social_icons_logic ()
 	
+	/**
+	 * Display Search Box In The Header.
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */	
+	public function woo_custom_add_searchform() {
+	    echo '<div id="header-search" class="header-search fr">' . "";
+	    get_template_part( 'search', 'form' );
+	    echo '</div><!--/#header-search .header-search fr-->' . "";
+	} // End woo_custom_add_searchform()	
+
 
 
 	/**
@@ -426,6 +443,12 @@ class Canvas_Advanced_Addons {
 								"id" => $shortname."_head_social_icons",
 								"std" => "false",
 								"type" => "checkbox" );
+
+			$options[] = array( "name" => __( 'Add Searchbox to Header', 'canvas-advanced-addons' ),
+								"desc" => __( 'Enabling this setting will add search input box to your header.', 'canvas-advanced-addons' ),
+								"id" => $shortname."_head_searchbox",
+								"std" => "false",
+								"type" => "checkbox" );			
 
 			$options[] = array( "name" => __( 'Adjust Top Navigation Menu Position', 'canvas-advanced-addons' ),
 								"desc" => __( 'Use these settings to adjust the alignment of the items within your Top Navigation Menu area.', 'canvas-advanced-addons' ),

@@ -25,7 +25,8 @@ Some of the features the plugin adds to your Canvas theme are listed below.
 
 06/07/2013 - version 1.0.3
 
-* Updated social icons to use the new FontAwesome Icon font in Canvas 5.3.0+.
+* Updated social icons to use the Social Icon font in Canvas 5.3.0+.
+* Added functionlity to add a search box to the header.
 
 04/26/2013 - version 1.0.2
 
