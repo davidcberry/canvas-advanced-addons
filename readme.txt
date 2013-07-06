@@ -20,7 +20,7 @@ Some of the features the plugin adds to your Canvas theme are listed below.
 2. Display full width footer with colour controls and background image settings.
 3. Adjust The Primary Navigation Menu Items Position Left, Right, Center.
 4. Adjust The Top Navigation Menu Items Position Left, Right, Center.
-5. Add theme connect & subscribe section social icons to the header area.
+5. Add theme connect & subscribe section social icons to the header area on the right Canvas v5.3.0 and above only.
 6. Add business slider to homepage.
 7. Add magazine slider to homepage.
 8. Display page content below the magazine slider.
