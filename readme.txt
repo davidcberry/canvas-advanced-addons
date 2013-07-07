@@ -43,6 +43,7 @@ Some of the features the plugin adds to your Canvas theme are listed below.
 = 1.0.3 =
 * Updated social icons to use the Social Icon font in Canvas 5.3.0+.
 * Added functionlity to add a search box to the header.
+* Added functionlity to add a search box to the right of the Primary Navigation menu.
 
 = 1.0.2 =
 * Removed full width header and footers.

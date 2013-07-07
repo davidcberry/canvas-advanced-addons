@@ -54,8 +54,15 @@ class Canvas_Advanced_Addons {
 
 		// Add Search Box To Header
 		if ( isset( $woo_options['woo_head_searchbox'] ) && ( 'true' == $woo_options['woo_head_searchbox'] ) ) {
-		add_action( 'woo_header_inside', array( &$this, 'woo_custom_add_searchform' ), 20 );
+		add_action( 'woo_header_inside', array( &$this, 'header_searchform' ), 10 );
+		remove_action( 'woo_nav_inside', array( &$this, 'primary_navigation_searchform' ), 10 );
 		}		
+
+		// Add Search Box To Primary Navigation
+		if ( isset( $woo_options['woo_primary_nav_searchbox'] ) && ( 'true' == $woo_options['woo_primary_nav_searchbox'] ) ) {
+		remove_action( 'woo_header_inside', array( &$this, 'header_searchform' ), 10 );	
+		add_action( 'woo_nav_inside', array( &$this, 'primary_navigation_searchform' ), 10 );
+		}			
 
 		// Enable Business Slider On Homepage
 		if ( isset( $woo_options['woo_biz_slider_homepage'] ) && ( 'true' == $woo_options['woo_biz_slider_homepage'] ) ) {
@@ -220,11 +227,23 @@ class Canvas_Advanced_Addons {
 	 * @since 1.0.0
 	 * @return void
 	 */	
-	public function woo_custom_add_searchform() {
+	public function header_searchform() {
 	    echo '<div id="header-search" class="header-search fr">' . "";
 	    get_template_part( 'search', 'form' );
 	    echo '</div><!--/#header-search .header-search fr-->' . "";
 	} // End woo_custom_add_searchform()	
+
+	/**
+	 * Display Search Box In The Header.
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */	
+	public function primary_navigation_searchform() {
+	    echo '<div id="nav-search" class="nav-search fr">' . "";
+	    get_template_part( 'search', 'form' );
+	    echo '</div><!--/#nav-search .nav-search fr-->' . "";
+	} // End woo_custom_add_searchform()		
 
 
 
@@ -369,6 +388,12 @@ class Canvas_Advanced_Addons {
 
 		}	
 
+		// Add css for header search box
+		if ( isset( $woo_options['woo_head_searchbox'] ) && ( 'true' == $woo_options['woo_head_searchbox'] ) ) {
+			$output .= '.header-search {position: relative; top: 10px; clear:right }' ."\n";
+			$output .= '.header-search .icon-search {position: absolute;top: 8px;right: 9px;}';
+		}			
+
 		// Add css for aligning the top navigation menu
 		if ( isset( $woo_options['woo_top_nav_align'] ) && ( 'false' != $woo_options['woo_top_nav_align'] ) ) {
 
@@ -397,13 +422,19 @@ class Canvas_Advanced_Addons {
 		        $output .= 'ul#main-nav {float:right;}'. "\n";
 		    endif;    		        	        
 
-		}		
+		}	
+
+		// Add css for primary navigation search box
+		if ( isset( $woo_options['woo_primary_nav_searchbox'] ) && ( 'true' == $woo_options['woo_primary_nav_searchbox'] ) ) {
+			$output .= '#nav-search .icon-search {position: absolute;top: 8px;right: 9px;}' ."\n";
+			$output .= '#nav-search {margin-right: 9px;}';
+		}			
 
 		// Add css for top nav WooCommerce mini cart
 		if ( isset( $woo_options['woo_mini_cart_location'] ) && ( 'top-nav' == $woo_options['woo_mini_cart_location'] ) ) {
 			$output .= '#top .cart-contents::before {font-family: \'FontAwesome\';display: inline-block;font-size: 100%;margin-right: .618em;font-weight: normal;line-height: 1em;width: 1em;content: "\f07a";}' ."\n";
 			$output .= '#top .cart{ margin-right:0px !important;}';
-		}
+		}	
 
 		// Output the CSS to the woo_head function
 		if ( '' != $output ) {
@@ -461,7 +492,12 @@ class Canvas_Advanced_Addons {
 								"id" => $shortname."_primary_nav_align",							
 								"type" => "select2",
 								"options" => array( "false" => __( 'Align Left', 'canvas-advanced-addons' ), "centre" => __( 'Align Centre', 'canvas-advanced-addons' ), "right" => __( 'Align Right', 'canvas-advanced-addons' ) ) );										
-
+			
+			$options[] = array( "name" => __( 'Add Searchbox to Primary Navigation', 'canvas-advanced-addons' ),
+								"desc" => __( 'Enabling this setting will add search input box to Primary Navigation area.', 'canvas-advanced-addons' ),
+								"id" => $shortname."_primary_nav_searchbox",
+								"std" => "false",
+								"type" => "checkbox" );	
 
 			// Canvas Homepage Options
 			$options[] = array( 'name' => __( 'Homepage Settings', 'canvas-advanced-addons' ),
