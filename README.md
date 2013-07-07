@@ -23,6 +23,8 @@ Some of the features the plugin adds to your Canvas theme are listed below.
 
 ## Changelog ##
 
+~Current Version:1.0.3~
+
 06/07/2013 - version 1.0.3
 
 * Updated social icons to use the Social Icon font in Canvas 5.3.0+.
