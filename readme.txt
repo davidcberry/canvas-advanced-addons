@@ -4,7 +4,7 @@ Donate link: http://stuartduff.com/
 Tags: themes, addon, styling, woothemes
 Requires at least: 3.5
 Tested up to: 3.6.0
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,6 +39,10 @@ Some of the features the plugin adds to your Canvas theme are listed below.
 1. The Canvas Advanced Addons Menu View.
 
 == Upgrade Notice ==
+
+= 1.0.4 =
+* Removed assets folder and old icon sprite for social icons.
+* Fixed p;lugin version number from incorrectly displaying v1.0.1.
 
 = 1.0.3 =
 * Updated social icons to use the Social Icon font in Canvas 5.3.0+.
