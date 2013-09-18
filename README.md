@@ -1,4 +1,4 @@
-# Canvas Advanced Addons Plugin v1.0.3 #
+# Canvas Advanced Addons Plugin v1.0.4 #
 
 The Canvas Advanced Addons plugin will add additonal styling and customizations options to the WooThemes Framework / Theme Options Panel of you Canvas v5 theme. You will need a copy of the [WooThemes Canvas WordPress Theme] (http://www.woothemes.com/products/canvas/) to use this plugin.
 
@@ -23,7 +23,10 @@ Some of the features the plugin adds to your Canvas theme are listed below.
 
 ## Changelog ##
 
-~Current Version:1.0.3~
+06/07/2013 - version 1.0.4
+
+* Removed assets folder and old icon sprite for social icons.
+* Fixed p;lugin version number from incorrectly displaying v1.0.1.
 
 06/07/2013 - version 1.0.3
 
