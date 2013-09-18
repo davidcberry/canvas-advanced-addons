@@ -23,7 +23,7 @@ Some of the features the plugin adds to your Canvas theme are listed below.
 
 ## Changelog ##
 
-06/07/2013 - version 1.0.4
+09/18/2013 - version 1.0.4
 
 * Removed assets folder and old icon sprite for social icons.
 * Fixed plugin version number from incorrectly displaying v1.0.1.
