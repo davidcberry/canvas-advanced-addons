@@ -42,7 +42,7 @@ Some of the features the plugin adds to your Canvas theme are listed below.
 
 = 1.0.4 =
 * Removed assets folder and old icon sprite for social icons.
-* Fixed p;lugin version number from incorrectly displaying v1.0.1.
+* Fixed plugin version number from incorrectly displaying v1.0.1.
 
 = 1.0.3 =
 * Updated social icons to use the Social Icon font in Canvas 5.3.0+.
