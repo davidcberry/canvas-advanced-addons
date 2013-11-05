@@ -231,10 +231,10 @@ class Canvas_Advanced_Addons {
 	    echo '<div id="header-search" class="header-search fr">' . "";
 	    get_template_part( 'search', 'form' );
 	    echo '</div><!--/#header-search .header-search fr-->' . "";
-	} // End woo_custom_add_searchform()	
+	} // End header_searchform()	
 
 	/**
-	 * Display Search Box In The Header.
+	 * Display Search Box In The Primary Navigation Area Aligned Right.
 	 * @access public
 	 * @since 1.0.0
 	 * @return void
@@ -243,7 +243,7 @@ class Canvas_Advanced_Addons {
 	    echo '<div id="nav-search" class="nav-search fr">' . "";
 	    get_template_part( 'search', 'form' );
 	    echo '</div><!--/#nav-search .nav-search fr-->' . "";
-	} // End woo_custom_add_searchform()		
+	} // End primary_navigation_searchform()		
 
 
 
@@ -273,7 +273,7 @@ class Canvas_Advanced_Addons {
 		    wp_reset_query();
 		} // End woo_custom_reset_biz_query()		
 
-	} // End full_width_footer_logic()	
+	} // End business_slider_logic()	
 
 	/**
 	 * Display the "Magazine" slider above the default WordPress homepage.
@@ -301,7 +301,7 @@ class Canvas_Advanced_Addons {
 		    wp_reset_query();
 		} // End woo_custom_reset_query()		
 
-	} // End full_width_footer_logic()
+	} // End magazine_slider_logic()
 
 
 	/**
@@ -336,7 +336,7 @@ class Canvas_Advanced_Addons {
 	 **/
 	public function remove_mini_cart_main_nav() {
 		remove_action( 'woo_nav_inside', 'woo_add_nav_cart_link' );
-	} // End remove_mini_cart_main_nav
+	} // End remove_mini_cart_main_nav()
 
 	/**
 	 * Move the mini cart to the top navigation
@@ -352,10 +352,10 @@ class Canvas_Advanced_Addons {
 			$items .= '</ul><ul class="nav cart fr"><li class="menu-item mini-cart-top-nav"><a class="cart-contents" href="'.esc_url( $woocommerce->cart->get_cart_url() ).'" title="'.esc_attr( 'View your shopping cart', 'woothemes' ).'">'.sprintf( _n('%d item', '%d items', $woocommerce->cart->cart_contents_count, 'woothemes' ), $woocommerce->cart->cart_contents_count ).' - '.$woocommerce->cart->get_cart_total().'</a></li>'; 
 		}
 		return $items;
-	} // End move_mini_cart_to_top_nav
+	} // End move_mini_cart_to_top_nav()
 
 	/**
-	 * Canvas Custom Styling.
+	 * Canvas Custom Styling Output.
 	 * @access public
 	 * @since 1.0.0
 	 * @return void
@@ -549,9 +549,7 @@ class Canvas_Advanced_Addons {
 
 	}
 
-
-
-} // End Class	
+} // End Class - Canvas_Advanced_Addons	
 
 
 
