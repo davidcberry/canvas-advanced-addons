@@ -460,10 +460,10 @@ class Canvas_Advanced_Addons {
 
 		 	$shortname = 'woo';
 
-		    // Full Width Header Options
+		    // Canvas Advanced Options
 		    $options[] = array( 'name' => __( 'Advanced Settings', 'canvas-advanced-addons' ),
 								'icon' => 'misc',
-							    'type' => 'heading');    
+							    'type' => 'heading');   
 
 			// Canvas Header Options
 			$options[] = array( 'name' => __( 'Header Settings', 'canvas-advanced-addons' ),
